@@ -87,3 +87,5 @@ ec2-fastapi-starter/
 - Always `shutdown` your machine before flipping physical kill-switches.
 
 AWS user ID: 303846056417
+
+EC2 location: /home/ec2-user/app
