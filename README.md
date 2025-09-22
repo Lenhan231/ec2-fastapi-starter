@@ -85,3 +85,5 @@ ec2-fastapi-starter/
 - Edit `backend/app/main.py` to add routers, DB, etc.
 - If you use port 8000 directly (no Nginx), open port 8000 in your Security Group.
 - Always `shutdown` your machine before flipping physical kill-switches.
+
+AWS user ID: 303846056417
