@@ -1,0 +1,43 @@
+.wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.25rem;
+  padding: 0.65rem 1rem calc(env(safe-area-inset-bottom) + 0.65rem);
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(24px);
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.45rem 0.35rem;
+  border-radius: 1rem;
+  color: rgba(226, 232, 240, 0.84);
+  font-size: 0.8rem;
+}
+
+.tab:hover {
+  background: rgba(37, 99, 235, 0.18);
+}
+
+.active {
+  background: rgba(37, 99, 235, 0.4);
+  color: white;
+}
+
+.icon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+@media (min-width: 960px) {
+  .wrapper {
+    display: none;
+  }
+}

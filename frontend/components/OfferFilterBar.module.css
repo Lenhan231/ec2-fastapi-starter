@@ -1,0 +1,45 @@
+.wrapper {
+  background: var(--surface);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field label {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.field input,
+.field select {
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 0.55rem 0.75rem;
+  font-size: 0.95rem;
+  background: #f8fafc;
+}
+
+.help {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.priceRow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.5rem;
+  align-items: center;
+}

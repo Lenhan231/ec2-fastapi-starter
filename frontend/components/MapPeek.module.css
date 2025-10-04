@@ -1,0 +1,28 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.mapMock {
+  position: relative;
+  height: 260px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #bfdbfe, #f8fafc);
+  overflow: hidden;
+}
+
+.pin {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.25);
+}
+
+@media (max-width: 960px) {
+  .mapMock {
+    height: 180px;
+  }
+}

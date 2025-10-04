@@ -1,0 +1,50 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.promoted {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #f97316;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.summary {
+  margin: 0;
+  color: #475569;
+  line-height: 1.45;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.entity {
+  color: #2563eb;
+}
+
+.meta {
+  font-size: 0.9rem;
+}
+
+.status {
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}

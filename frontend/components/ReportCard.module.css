@@ -1,0 +1,51 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.open {
+  color: #ef4444;
+}
+
+.investigating {
+  color: #f59e0b;
+}
+
+.resolved {
+  color: #10b981;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.reason {
+  margin: 0;
+  color: #475569;
+}
+
+.link {
+  color: #2563eb;
+  font-weight: 600;
+  width: fit-content;
+}

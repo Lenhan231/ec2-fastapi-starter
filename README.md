@@ -1,91 +1,46 @@
-# EC2 FastAPI Starter 🥀
+# Easy Body Platform — Prototype
 
-Minimal repo to spin up a FastAPI app on an EC2 instance, then snapshot an AMI later.
+This repo currently focuses on the product flows and the frontend prototype for the Easy Body platform. Back-of-house services (Spring Boot, moderation workers) will follow once the UI is validated.
 
-## Stack
-- Python 3.10+
-- FastAPI + Uvicorn
-- systemd service (to run on boot)
-- (Optional) Nginx reverse proxy to expose on port 80
+## Documents
 
----
+- `FLOW.md` — moderation and offer lifecycle (swimlanes, events, API slices)
+- `LAYOUT.md` — screen structure, routing map, component tree, and data contracts
 
-## Run locally
+## Frontend (Next.js 14, TypeScript)
 
-```bash
-python -V                 # 3.10+
-python -m venv .venv
-source .venv/bin/activate # Windows: .venv\Scripts\activate
-pip install -r backend/requirements.txt
-uvicorn backend.app.main:app --reload --port 8000
-# open http://127.0.0.1:8000
-```
+The `frontend/` directory contains an App Router project that realises the layout specification (header + bottom nav, tabbed routes, role-aware profile & management screens).
 
-## Deploy later on EC2 (Ubuntu 22.04)
-SSH into the instance, then:
+### Scripts
 
 ```bash
-# System deps
-sudo apt update -y && sudo apt install -y python3-pip python3-venv nginx
-
-# Create app folder
-mkdir -p ~/app && cd ~/app
-# Upload files in this repo to ~/app (scp/gh clone/s3, etc.)
-
-# Python env
-python3 -m venv ~/venv
-source ~/venv/bin/activate
-pip install -r backend/requirements.txt
-
-# systemd
-sudo cp systemd/fastapi.service /etc/systemd/system/fastapi.service
-sudo systemctl daemon-reload
-sudo systemctl enable fastapi
-sudo systemctl start fastapi
-sudo systemctl status fastapi --no-pager
+cd frontend
+npm install
+NEXT_PUBLIC_API_BASE_URL="http://localhost:8000/api/v1" npm run dev
 ```
 
-### (Optional) Nginx reverse proxy (port 80 → 127.0.0.1:8000)
-```bash
-sudo cp nginx/fastapi /etc/nginx/sites-available/fastapi
-sudo ln -sf /etc/nginx/sites-available/fastapi /etc/nginx/sites-enabled/default
-sudo nginx -t && sudo systemctl restart nginx
-```
+The pages use server components for data fetching and gracefully fall back to curated mock data when the API is unavailable.
 
-Now visit `http://EC2_PUBLIC_IP` *(ensure security group allows HTTP 80).*
+### Key Routes
 
----
+- `/` — Gym discovery with filters, map peek, Airbnb-style cards
+- `/offers/gyms` — Gym offer listing + moderation-aware highlights
+- `/offers/gyms/[offerId]` — Offer detail page with related deals
+- `/offers/pts` — PT offer listing with price filters
+- `/offers/pts/[offerId]` — PT offer detail + PT profile context
+- `/gyms/[gymId]` — Gym profile, reviews, related offers, PT listing
+- `/gyms/[gymId]/pts` — PTs operating at the gym
+- `/pts/[ptId]` — PT detail page
+- `/manage/gym` — Gym Staff dashboard (info editor, offer wizard placeholder, PT approvals)
+- `/manage/pt` — PT dashboard (profile editor, offer wizard placeholder)
+- `/moderation` — Admin moderation queue (escalated offers)
+- `/reports` — User reports awaiting re-review
+- `/profile` — role-aware user space with bookmarks and reviews
 
-## Create AMI later
-- EC2 Console → Instances → select instance → **Actions → Image and templates → Create image**.
-- Name: `ami-fastapi-YYYY-MM-DD`. Leave **No reboot** unchecked for safety.
-- AWS will create the AMI + EBS snapshot; you can launch identical servers from it.
+All interaction shells include the validation rules mentioned in the spec (title length, validFrom/validTo hints, image requirements) so the backend contract is clear.
 
----
+## Next Steps
 
-## Repo layout
-```
-ec2-fastapi-starter/
-├─ backend/
-│  ├─ app/
-│  │  └─ main.py
-│  └─ requirements.txt
-├─ systemd/
-│  └─ fastapi.service
-├─ nginx/
-│  └─ fastapi
-├─ .gitignore
-├─ .env.example
-└─ README.md
-```
-
----
-
-## Notes
-- Edit `backend/app/main.py` to add routers, DB, etc.
-- If you use port 8000 directly (no Nginx), open port 8000 in your Security Group.
-- Always `shutdown` your machine before flipping physical kill-switches.
-
-AWS user ID: 303846056417
-
-EC2 location: /home/ec2-user/app
+1. Hook the UI to real endpoints (Spring Boot API following `FLOW.md`).
+2. Implement Cognito-authenticated route guards and RBAC.
+3. Add moderation dashboards (admin queue, report re-review) and analytics instrumentation.

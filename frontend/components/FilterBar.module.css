@@ -1,0 +1,75 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.08);
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.fieldGroup label {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.fieldGroup input,
+.fieldGroup select {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 0.55rem 0.75rem;
+  font-size: 0.95rem;
+  background: #f8fafc;
+}
+
+.inlineGroup {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.priceRow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.help {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.amenityChip {
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: 999px;
+  background: transparent;
+  color: #2563eb;
+  padding: 0.4rem 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.activeChip {
+  background: #2563eb;
+  color: white;
+}
+
+@media (max-width: 960px) {
+  .wrapper {
+    padding: 1rem;
+  }
+}

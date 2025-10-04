@@ -1,18 +1,7 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-.env
-.venv/
-venv/
-ENV/
-build/
-dist/
-
-# OS
-.DS_Store
-
-# IDE
+node_modules/
 .vscode/
+.DS_Store
 .idea/
+.env
+frontend/.next/
+frontend/out/
