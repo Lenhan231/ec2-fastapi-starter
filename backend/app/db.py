@@ -1,8 +1,5 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
+"""Backwards compatible entrypoint for database helpers."""
 
-DB_URL = "sqlite:///./app.db"  # sau này đổi sang postgres://...
-engine = create_engine(DB_URL, connect_args={"check_same_thread": False})
-SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
+from .core.database import create_db_and_tables, engine, get_session
 
-class Base(DeclarativeBase): ...
+__all__ = ["create_db_and_tables", "engine", "get_session"]

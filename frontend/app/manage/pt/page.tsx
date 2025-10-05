@@ -99,14 +99,17 @@ function ManagePTPage() {
           />
         ) : (
           <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: "0.65rem" }}>
-            {offers.map((offer) => (
-              <li key={offer.id} style={{ display: "flex", justify-content: "space-between", alignItems: "center" }}>
-                <span>{offer.title}</span>
-                <span style={{ fontSize: "0.85rem", fontWeight: 600, color: offer.status === "approved" ? "#10b981" : "#f97316" }}>
-                  {offer.status}
-                </span>
-              </li>
-            ))}
+            {offers.map((offer) => {
+              const statusColor = offer.status === "approved" ? "#10b981" : "#f97316";
+              return (
+                <li key={offer.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span>{offer.title}</span>
+                  <span style={{ fontSize: "0.85rem", fontWeight: 600, color: statusColor }}>
+                    {offer.status}
+                  </span>
+                </li>
+              );
+            })}
           </ul>
         )}
       </section>

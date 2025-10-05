@@ -133,23 +133,6 @@ const mockPTs: PTProfile[] = [
   }
 ];
 
-const mockReviews: Review[] = [
-  {
-    id: 1,
-    author: "Mai",
-    rating: 5,
-    content: "Phòng tập sạch sẽ, PT nhiệt tình, lịch linh hoạt.",
-    created_at: new Date(now - sevenDays).toISOString()
-  },
-  {
-    id: 2,
-    author: "Tuấn",
-    rating: 4,
-    content: "Thiết bị mới, hơi đông vào giờ cao điểm nhưng vẫn ổn.",
-    created_at: new Date(now - sevenDays * 2).toISOString()
-  }
-];
-
 const mockProfile: UserProfile = {
   id: 501,
   name: "Nguyễn Khánh Linh",
@@ -159,7 +142,7 @@ const mockProfile: UserProfile = {
     { id: 1, type: "GYM", name: "Future Fitness District 1", href: "/gyms/1" },
     { id: 31, type: "PT", name: "Coach Linh", href: "/pts/31" }
   ],
-  reviews: mockReviews
+  reviews: []
 };
 
 const mockModerationQueue: ModerationItem[] = [
@@ -297,7 +280,7 @@ export const api = {
       return await request<Review[]>(`/gyms/${id}/reviews`);
     } catch (error) {
       console.warn("Fallback getGymReviews", error);
-      return mockReviews;
+      return [];
     }
   },
 

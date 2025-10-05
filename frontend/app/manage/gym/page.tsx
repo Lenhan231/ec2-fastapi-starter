@@ -85,10 +85,7 @@ function ManageGymPage() {
       </section>
 
       <section className="card" style={{ display: "grid", gap: "0.75rem" }}>
-        <div style={{ display: "flex", justify-content: "space-between", alignItems: "center" }}>
-          <h2 style={{ margin: 0 }}>Tạo ưu đãi mới</h2>
-          <span style={{ color: "var(--muted)", fontSize: "0.9rem" }}>Wizard 3 bước: Nội dung → Ảnh → Review & Submit</span>
-        </div>
+        <h2 style={{ margin: 0 }}>Tạo ưu đãi mới</h2>
         <OfferFilterBar variant="gym" />
         <button className="cta-button" style={{ width: "fit-content" }}>
           Bắt đầu wizard
@@ -104,14 +101,17 @@ function ManageGymPage() {
           />
         ) : (
           <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: "0.65rem" }}>
-            {offers.map((offer) => (
-              <li key={offer.id} style={{ display: "flex", justify-content: "space-between", alignItems: "center" }}>
-                <span>{offer.title}</span>
-                <span style={{ fontSize: "0.85rem", fontWeight: 600, color: offer.status === "approved" ? "#10b981" : "#f97316" }}>
-                  {offer.status}
-                </span>
-              </li>
-            ))}
+            {offers.map((offer) => {
+              const statusColor = offer.status === "approved" ? "#10b981" : "#f97316";
+              return (
+                <li key={offer.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span>{offer.title}</span>
+                  <span style={{ fontSize: "0.85rem", fontWeight: 600, color: statusColor }}>
+                    {offer.status}
+                  </span>
+                </li>
+              );
+            })}
           </ul>
         )}
       </section>
@@ -126,9 +126,9 @@ function ManageGymPage() {
         ) : (
           <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: "0.65rem" }}>
             {pendingPT.map((pt) => (
-              <li key={pt.id} style={{ display: "flex", justify-content: "space-between", alignItems: "center" }}>
+              <li key={pt.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <span>
-                  {pt.name} • nộp {pt.submittedAt}
+                  {`${pt.name} - nộp ${pt.submittedAt}`}
                 </span>
                 <div style={{ display: "flex", gap: "0.5rem" }}>
                   <button className="cta-button" style={{ background: "#22c55e" }} onClick={() => setPendingPT((current) => current.filter((item) => item.id !== pt.id))}>

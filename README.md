@@ -39,6 +39,23 @@ The pages use server components for data fetching and gracefully fall back to cu
 
 All interaction shells include the validation rules mentioned in the spec (title length, validFrom/validTo hints, image requirements) so the backend contract is clear.
 
+## Backend (FastAPI + SQLModel)
+
+- Located under `backend/`; uses SQLite by default (override with `DATABASE_URL`).
+- Models cover gyms, PT profiles, offers, reviews, moderation queue, reports, and auth users.
+- Startup seeds the database so the API mirrors the frontend demo data.
+- REST endpoints: `/gyms`, `/gym-offers`, `/pt-offers`, `/pts`, `/profile/me`, `/moderation/queue`, `/reports`, and `/auth/*` for register/login.
+- Simple JWT auth using `/auth/register` and `/auth/login` (seed user `linh.nguyen@example.com` / `password123`).
+
+### Run API locally
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r backend/requirements.txt
+uvicorn backend.app.main:app --reload
+```
+
 ## Next Steps
 
 1. Hook the UI to real endpoints (Spring Boot API following `FLOW.md`).

@@ -1,45 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./FilterBar.module.css";
 
-interface FilterState {
+export type FilterState = {
   query: string;
   distance: number;
   priceRange: [number, number];
   rating: number;
-  amenities: string[];
-}
-
-const amenityOptions = ["Sauna", "Boxing", "Yoga", "Swimming", "Parking"];
+};
 
 export type FilterBarProps = {
+  initialState?: FilterState;
   onChange?: (state: FilterState) => void;
 };
 
-function FilterBar({ onChange }: FilterBarProps) {
-  const [state, setState] = useState<FilterState>({
-    query: "",
-    distance: 5,
-    priceRange: [300000, 1500000],
-    rating: 4,
-    amenities: []
-  });
+export const DEFAULT_FILTER_STATE: FilterState = {
+  query: "",
+  distance: 5,
+  priceRange: [300000, 1500000],
+  rating: 4
+};
+
+function FilterBar({ initialState = DEFAULT_FILTER_STATE, onChange }: FilterBarProps) {
+  const [state, setState] = useState<FilterState>(initialState);
+
+  useEffect(() => {
+    onChange?.({ ...state });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const update = (partial: Partial<FilterState>) => {
     const next = { ...state, ...partial };
     setState(next);
     onChange?.(next);
-  };
-
-  const toggleAmenity = (amenity: string) => {
-    const set = new Set(state.amenities);
-    if (set.has(amenity)) {
-      set.delete(amenity);
-    } else {
-      set.add(amenity);
-    }
-    update({ amenities: Array.from(set) });
   };
 
   return (
@@ -104,25 +98,6 @@ function FilterBar({ onChange }: FilterBarProps) {
               </option>
             ))}
           </select>
-        </div>
-      </div>
-
-      <div className={styles.fieldGroup}>
-        <label>Tiện ích</label>
-        <div className={styles.amenities}>
-          {amenityOptions.map((amenity) => {
-            const active = state.amenities.includes(amenity);
-            return (
-              <button
-                type="button"
-                key={amenity}
-                className={`${styles.amenityChip} ${active ? styles.activeChip : ""}`}
-                onClick={() => toggleAmenity(amenity)}
-              >
-                {amenity}
-              </button>
-            );
-          })}
         </div>
       </div>
     </aside>
